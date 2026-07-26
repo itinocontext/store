@@ -1,0 +1,229 @@
+
+:root {
+  color-scheme: dark;
+  font-family: 'Kanit', sans-serif;
+  background: #0c0c0c;
+  color: #f5f6f7;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  --page-bg: #0c0c0c;
+  --ink: #f5f6f7;
+  --muted: #aab1b8;
+  --line: rgba(215, 226, 234, 0.2);
+  --accent: #6bbf7a;
+  --accent-soft: #85cc92;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--page-bg);
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  background: var(--page-bg);
+}
+
+body {
+  overflow-x: hidden;
+}
+
+button,
+a,
+input,
+select {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  color: #0c0c0c;
+  background: #fff;
+}
+
+.hero-heading {
+  background: linear-gradient(180deg, #646973 0%, #bbccd7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.08'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  mix-blend-mode: soft-light;
+  z-index: 80;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(.9); opacity: .65; }
+  70%, 100% { transform: scale(1.45); opacity: 0; }
+}
+
+@keyframes marquee {
+  to { transform: translateX(-33.333%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* Mobile product cards: the desktop sticky stack used a fixed viewport height.
+   On phones the purchase controls exceeded that height and were clipped by
+   overflow-hidden. Mobile/tablet cards now grow with their content, so size
+   selection and Add to bag remain reachable. */
+@media (max-width: 1023px) {
+  .product-card-container {
+    height: auto !important;
+    min-height: 0 !important;
+    margin-bottom: 28px;
+  }
+
+  .product-card-container:last-child {
+    margin-bottom: 0;
+  }
+
+  .product-card {
+    position: relative !important;
+    top: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    transform: none !important;
+    overflow: hidden;
+  }
+
+  .product-card > div {
+    height: auto !important;
+  }
+}
+
+@media (max-width: 639px) {
+  .product-card {
+    border-radius: 32px;
+    padding: 12px;
+  }
+
+  .product-card button {
+    touch-action: manipulation;
+  }
+}
+
+
+/* ITI mobile purchase fix v4 — applied with versioned files to bypass GitHub/browser cache. */
+body {
+  overflow-y: auto !important;
+  overscroll-behavior-y: auto;
+  touch-action: pan-y;
+}
+
+.product-card-container {
+  scroll-margin-top: 20px;
+}
+
+.product-card img {
+  pointer-events: none;
+}
+
+.product-card button {
+  pointer-events: auto !important;
+  touch-action: manipulation;
+}
+
+@media (max-width: 1023px) {
+  .product-card-container {
+    display: block !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .product-card {
+    position: relative !important;
+    inset: auto !important;
+    top: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    transform: none !important;
+  }
+
+  .product-card > div {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .product-card {
+    top: var(--sticky-top, 96px);
+  }
+}
+
+@media (max-width: 639px) {
+  #shop {
+    padding-bottom: calc(7rem + env(safe-area-inset-bottom));
+  }
+
+  .product-card-container {
+    margin-bottom: 24px !important;
+  }
+
+  .product-card {
+    border-radius: 30px !important;
+    padding: 10px !important;
+  }
+}
