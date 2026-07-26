@@ -6,8 +6,8 @@ const PRODUCTS = [
     {
         id: 'green',
         src: './assets/verde.png',
-        bg: '#6BBF7A',
-        panel: '#85CC92',
+        bg: '#9F9C89',
+        panel: '#9F9C89',
         name: 'Lower Than My Standards',
         price: '**,** €',
         color: 'Racing Green',
@@ -17,8 +17,8 @@ const PRODUCTS = [
     {
         id: 'pink',
         src: './assets/rosa.png',
-        bg: '#E882B4',
-        panel: '#ED9DC4',
+        bg: '#C6585D',
+        panel: '#C6585D',
         name: 'Lower Than My Standards',
         price: '**,** €',
         color: 'Pit Pink',
@@ -28,8 +28,8 @@ const PRODUCTS = [
     {
         id: 'blue',
         src: './assets/azul.png',
-        bg: '#6EB5FF',
-        panel: '#8DC4FF',
+        bg: '#A5B4CC',
+        panel: '#A5B4CC',
         name: 'Lower Than My Standards',
         price: '**,** €',
         color: 'Grid Blue',
@@ -39,8 +39,8 @@ const PRODUCTS = [
     {
         id: 'black',
         src: './assets/negro.png',
-        bg: '#171719',
-        panel: '#29292C',
+        bg: '#454548',
+        panel: '#454548',
         name: 'Lower Than My Standards',
         price: '**,** €',
         color: 'After Hours Black',
