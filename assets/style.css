@@ -119,3 +119,44 @@ img {
     scroll-behavior: auto !important;
   }
 }
+
+
+/* Mobile product cards: the desktop sticky stack used a fixed viewport height.
+   On phones the purchase controls exceeded that height and were clipped by
+   overflow-hidden. Mobile/tablet cards now grow with their content, so size
+   selection and Add to bag remain reachable. */
+@media (max-width: 1023px) {
+  .product-card-container {
+    height: auto !important;
+    min-height: 0 !important;
+    margin-bottom: 28px;
+  }
+
+  .product-card-container:last-child {
+    margin-bottom: 0;
+  }
+
+  .product-card {
+    position: relative !important;
+    top: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    transform: none !important;
+    overflow: hidden;
+  }
+
+  .product-card > div {
+    height: auto !important;
+  }
+}
+
+@media (max-width: 639px) {
+  .product-card {
+    border-radius: 32px;
+    padding: 12px;
+  }
+
+  .product-card button {
+    touch-action: manipulation;
+  }
+}
