@@ -75,7 +75,8 @@ function cn(...classes) {
     return classes.filter(Boolean).join(' ');
 }
 function FadeIn({ as = 'div', children, delay = 0, duration = 0.7, x = 0, y = 30, className, }) {
-    const MotionTag = motion.create(as);
+    // Stable component identity prevents the hero copy from remounting on every state update.
+    const MotionTag = as === 'header' ? motion.header : motion.div;
     return (_jsx(MotionTag, { className: className, initial: { opacity: 0, x, y }, whileInView: { opacity: 1, x: 0, y: 0 }, viewport: { once: true, margin: '50px', amount: 0 }, transition: { duration, delay, ease: [0.25, 0.1, 0.25, 1] }, children: children }));
 }
 function Magnet({ children, padding = 150, strength = 3, className, }) {
@@ -282,7 +283,7 @@ function ProductCard({ product, index, total, onAdd, }) {
     const scale = useTransform(scrollYProgress, [0, 1], [1, targetScale]);
     return (_jsx("div", { ref: containerRef, className: "relative h-[92vh] min-h-[720px]", children: _jsx(motion.article, { style: { scale, top: `${96 + index * 18}px` }, className: "sticky mx-auto grid h-[76vh] min-h-[610px] max-w-7xl overflow-hidden rounded-[36px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-4 sm:rounded-[50px] sm:p-6 md:rounded-[60px] md:p-8", children: _jsxs("div", { className: "grid h-full gap-4 lg:grid-cols-[.8fr_1.2fr] lg:gap-6", children: [_jsxs("div", { className: "relative flex min-h-[280px] flex-col justify-between overflow-hidden rounded-[28px] p-5 sm:rounded-[40px] sm:p-7", style: { backgroundColor: product.bg }, children: [_jsxs("div", { className: "relative z-20 flex items-start justify-between gap-4", children: [_jsxs("div", { children: [_jsx("p", { className: "text-xs font-medium uppercase tracking-[0.2em] text-white/70", children: product.capsule }), _jsxs("p", { className: "mt-2 font-anton text-[clamp(3.5rem,8vw,8rem)] leading-none text-white", children: ["0", index + 1] })] }), _jsx("span", { className: "rounded-full border border-white/50 px-4 py-2 text-[10px] uppercase tracking-[0.18em] text-white", children: product.color })] }), _jsx("img", { src: product.src, alt: `${product.name} — ${product.color}`, loading: "lazy", className: "absolute bottom-[-20%] left-1/2 h-[120%] w-auto max-w-none -translate-x-1/2 object-contain drop-shadow-[0_30px_35px_rgba(0,0,0,.35)] sm:bottom-[-26%] sm:h-[132%]" }), _jsx("p", { className: "relative z-20 max-w-[180px] text-xs uppercase leading-relaxed tracking-[0.14em] text-white/75", children: product.note })] }), _jsxs("div", { className: "flex flex-col justify-between rounded-[28px] border border-white/12 bg-[#111] p-5 sm:rounded-[40px] sm:p-7 md:p-9", children: [_jsxs("div", { className: "flex items-start justify-between gap-5", children: [_jsxs("div", { children: [_jsx("p", { className: "text-xs uppercase tracking-[0.2em] text-[#D7E2EA]/55", children: "Current piece" }), _jsx("h3", { className: "mt-4 max-w-xl text-[clamp(2rem,4vw,4.8rem)] font-semibold uppercase leading-[.92] tracking-[-.035em] text-[#D7E2EA]", children: product.name })] }), _jsx("span", { className: "whitespace-nowrap text-lg font-medium text-[#D7E2EA] sm:text-2xl", children: product.price })] }), _jsxs("div", { className: "my-6 grid gap-5 border-y border-white/12 py-5 sm:grid-cols-2 sm:gap-8 sm:py-7", children: [_jsxs("div", { children: [_jsx("p", { className: "mb-3 text-[10px] uppercase tracking-[0.2em] text-[#D7E2EA]/50", children: "Colour" }), _jsxs("div", { className: "flex items-center gap-3 text-sm uppercase tracking-wider text-[#D7E2EA]", children: [_jsx("span", { className: "h-5 w-5 rounded-full border border-white/40", style: { backgroundColor: product.bg } }), product.color] })] }), _jsxs("div", { children: [_jsx("p", { className: "mb-3 text-[10px] uppercase tracking-[0.2em] text-[#D7E2EA]/50", children: "Select size" }), _jsx("div", { className: "flex flex-wrap gap-2", children: SIZES.map((option) => (_jsx("button", { type: "button", onClick: () => setSize(option), className: cn('h-10 min-w-10 rounded-full border px-3 text-xs font-medium transition', size === option
                                                         ? 'border-[#D7E2EA] bg-[#D7E2EA] text-[#0C0C0C]'
-                                                        : 'border-white/25 text-[#D7E2EA] hover:border-white'), children: option }, option))) })] })] }), _jsxs("div", { className: "flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between", children: [_jsx("p", { className: "max-w-md text-sm font-light leading-relaxed text-[#D7E2EA]/60", children: "Selecciona talla y a\u00F1ade la variante al carrito. La conexi\u00F3n final con stock y proveedor se realizar\u00E1 desde nuestra tienda oficial." }), _jsxs("button", { type: "button", onClick: () => onAdd(product.id, size), className: "group inline-flex min-h-14 shrink-0 items-center justify-center gap-3 rounded-full px-7 text-xs font-semibold uppercase tracking-[0.16em] text-white transition hover:scale-[1.03]", style: { backgroundColor: product.panel }, children: ["Add to bag ", _jsx(ShoppingBag, { size: 18 })] })] })] })] }) }) }));
+                                                        : 'border-white/25 text-[#D7E2EA] hover:border-white'), children: option }, option))) })] })] }), _jsxs("div", { className: "flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between", children: [_jsx("p", { className: "max-w-md text-sm font-light leading-relaxed text-[#D7E2EA]/60", children: "Selecciona talla y a\u00F1ade la variante al carrito. La conexi\u00F3n final con stock y proveedor se realizar\u00E1 desde nuestra tienda." }), _jsxs("button", { type: "button", onClick: () => onAdd(product.id, size), className: "group inline-flex min-h-14 shrink-0 items-center justify-center gap-3 rounded-full px-7 text-xs font-semibold uppercase tracking-[0.16em] text-white transition hover:scale-[1.03]", style: { backgroundColor: product.panel }, children: ["Add to bag ", _jsx(ShoppingBag, { size: 18 })] })] })] })] }) }) }));
 }
 function ShopSection({ onAdd }) {
     return (_jsxs("section", { id: "shop", className: "relative z-10 -mt-10 rounded-t-[40px] bg-[#0C0C0C] px-3 pb-24 pt-20 sm:-mt-12 sm:rounded-t-[50px] sm:px-6 sm:pt-24 md:-mt-14 md:rounded-t-[60px] md:px-8 md:pt-32", children: [_jsxs(FadeIn, { y: 40, className: "mb-14 text-center sm:mb-20", children: [_jsx("p", { className: "mb-4 text-xs uppercase tracking-[0.28em] text-[#D7E2EA]/50", children: "Choose your colour" }), _jsx("h2", { className: "hero-heading font-anton text-[clamp(4rem,13vw,11rem)] uppercase leading-none tracking-[-0.04em]", children: "Shop Drop" })] }), _jsx("div", { className: "mx-auto max-w-[1500px]", children: PRODUCTS.map((product, index) => (_jsx(ProductCard, { product: product, index: index, total: PRODUCTS.length, onAdd: onAdd }, product.id))) })] }));
@@ -324,7 +325,7 @@ function CartDrawer({ open, lines, onClose, onChangeQuantity, }) {
 }
 export default function App() {
     const [activeIndex, setActiveIndex] = useState(0);
-    const [isAnimating, setIsAnimating] = useState(false);
+    const isAnimatingRef = useRef(false);
     const [cartOpen, setCartOpen] = useState(false);
     const [cartLines, setCartLines] = useState(() => {
         try {
@@ -345,21 +346,25 @@ export default function App() {
         localStorage.setItem('iti-cart', JSON.stringify(cartLines));
     }, [cartLines]);
     const navigate = useCallback((direction) => {
-        if (isAnimating)
+        if (isAnimatingRef.current)
             return;
-        setIsAnimating(true);
+        isAnimatingRef.current = true;
         setActiveIndex((current) => direction === 'next'
             ? (current + 1) % PRODUCTS.length
             : (current + PRODUCTS.length - 1) % PRODUCTS.length);
-        window.setTimeout(() => setIsAnimating(false), 650);
-    }, [isAnimating]);
+        window.setTimeout(() => {
+            isAnimatingRef.current = false;
+        }, 650);
+    }, []);
     const selectIndex = useCallback((index) => {
-        if (isAnimating || index === activeIndex)
+        if (isAnimatingRef.current || index === activeIndex)
             return;
-        setIsAnimating(true);
+        isAnimatingRef.current = true;
         setActiveIndex(index);
-        window.setTimeout(() => setIsAnimating(false), 650);
-    }, [activeIndex, isAnimating]);
+        window.setTimeout(() => {
+            isAnimatingRef.current = false;
+        }, 650);
+    }, [activeIndex]);
     useEffect(() => {
         const onKeyDown = (event) => {
             if (event.key === 'ArrowRight')
