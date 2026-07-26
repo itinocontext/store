@@ -63,7 +63,7 @@ const SYSTEM_ITEMS = [
     {
         number: '03',
         name: 'OVERSIZED ATTITUDE',
-        description: 'Volumen, capas y una estética urbana inspirada en la cultura europea del motor y el teamwear.',
+        description: 'Volumen, capas y una estética urbana inspirada en la cultura del motor y el teamwear.',
     },
     {
         number: '04',
